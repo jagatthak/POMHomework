@@ -1,12 +1,11 @@
 package org.example;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +47,19 @@ public class Utils extends BasePage{
     {
         driver.findElement(by).getText();
     }
+    public void validateURL(String URL){
+        String ActualURL=driver.getCurrentUrl();
+        System.out.println(ActualURL);
+        String ExpectedURL =URL ;
+        Assert.assertEquals(ActualURL,ExpectedURL,"Wrong URL");
+    }
+        public void VerifyActualAndExpected(By by,String text){
+       String ActualText = driver.findElement(by).getText();
+        System.out.println(ActualText);
+        String ExpectedText =text;
+        Assert.assertEquals(ActualText,ExpectedText,"Wrong Text");
+
+    }
     public void SelectRadioButton(By by){
         WebElement radio1 = driver.findElement(by);
         radio1.click();
@@ -58,6 +70,10 @@ public class Utils extends BasePage{
         for (int i = 0; i < 2; i++) {
             System.out.println(Checkbox.isSelected());
         }
+    }
+    public void SelectFromDropDownMenuByValue(By by,String Value){
+        Select BirthMonth = new Select(driver.findElement(by));
+        BirthMonth.selectByValue(Value);
     }
 
     //Explicit Wait methods

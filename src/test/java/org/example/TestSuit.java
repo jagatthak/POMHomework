@@ -2,7 +2,7 @@ package org.example;
 
 import org.testng.annotations.Test;
 
-public class TestSuit extends BaseTest{
+public class TestSuit extends BaseTest {
     HomePage homepage = new HomePage();
     RegistrationPage registrationPage = new RegistrationPage();
     RegistrationSuccessPage registrationSuccessPage = new RegistrationSuccessPage();
@@ -11,6 +11,10 @@ public class TestSuit extends BaseTest{
     ComputersPage computersPage = new ComputersPage();
     DesktopsPage desktopsPage = new DesktopsPage();
     ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    NopcommerceNewReleasePage nopcommerceNewReleasePage =new NopcommerceNewReleasePage();
+    PageAfterSearch pageAfterSearch = new PageAfterSearch();
+    FacebookPage facebookPage =new FacebookPage();
+
 
     @Test
     public void UserShouldBeAbleToRegisterSuccessfullyAndVerifyRegistrationMessage() {
@@ -132,7 +136,7 @@ public class TestSuit extends BaseTest{
     }
 
     @Test
-    public void UserShouldBeAbleToVoteAndVerifyVotes(){
+    public void UserShouldBeAbleToVoteAndVerifyVotes() {
 
         //click on Good radio button below Community poll
         homepage.UserShouldClickGoodRadioButtonForCommunityPoll();
@@ -172,7 +176,79 @@ public class TestSuit extends BaseTest{
         homepage.UserShouldClickOnVoteButton();
         //Verify Votes
         homepage.UserShouldBeAbleTOVoteAfterRegistering();
+    }
 
+    @Test
+    //GetProductTitlesFromHomePageByArrayList
+    public void GetProductTitlesFromHomePge() {
+        homepage.GetProductTitles();
+    }
+
+    @Test
+    public void ByClickingOnVoteButtonWithoutRegisteringUserShouldGetAlertAndAbleToComeBackToHomePage(){
+        //ClickOnVoteButton
+        homepage.UserShouldClickOnVoteButton();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //SwitchToAlertAndCloseAndComeToHomepage
+        homepage.UserShouldSwitchToAlertWithoutRegisteringAndComeBackToParentWindow();
+    }
+
+    @Test
+    public void UserShouldClickOnFaceBookButtonAndPopupWindowShouldAppearAndComeBackToParentWindow(){
+        //ClickOnFacebookButton
+        homepage.UserShouldBeAbleToClickOnFacebookButton();
+        //NavigateToFacebookPageAndVerifyURLAndComeToHomePageByHandleWindows
+        facebookPage.UserShouldBeAbleToNavigateToFacebookPageSuccessfullyAndComeBackToHomePage();
+        //VerifyHomePageURL
+        homepage.UserShouldVerifyHomePageUrl();
+    }
+
+    @Test
+    public void UserShouldClickOnNopCommerceNewReleaseAndAddNewCommentAndVerify(){
+        //ClickOnNopcommerceNewRelease
+        homepage.UserShouldClickOnNopCommerceNewRelease();
+        //VerifyURL
+        nopcommerceNewReleasePage.VerifyUrlNopcommerceNewRelease();
+        //VerifyTitle
+        nopcommerceNewReleasePage.VerifyNopcommerceNewReleaseTitle();
+        //EnterCommentNameAndComment
+        nopcommerceNewReleasePage.UserShouldEnterCommentWithTitle();
+        //VerifyMessage
+        nopcommerceNewReleasePage.VerifyResultTextMessage();
+        //VerifyCommentAdded
+        nopcommerceNewReleasePage.VerifyCommentIsAdded();
+        //VerifyCommentAddedLast
+        nopcommerceNewReleasePage.VerifyYourCommentIsLast();
 
     }
+    @Test
+    public void UserShouldNavigateToDesktopPageAndVerifyZToASortingOfProducts(){
+        //ClickOnComputers
+        homepage.UserShouldClickOnComputers();
+        //VerifyComputerPageUrl
+        computersPage.UserShouldVerifyComputersPageUrl();
+        //ClickOnDesktop
+        computersPage.UserShouldClickOnDesktops();
+        //VerifyDesktopPageUrl
+        desktopsPage.UserShouldVerifyDesktopUrl();
+        //SelectZtoAFromDropdownMenu
+        desktopsPage.SelectFromDropDownMenu();
+        //CompareActualProductListToExpectedListSortedAsPerZToA
+        desktopsPage.UserShouldCompareToExpectedSortingZToA();
+     }
+     @Test
+    public void UserShouldSearchTextAndVerifyForTextInProductTitles(){
+        //EnterTextInSearchAndClickOnSearch
+        homepage.UserShouldEnterTextInSearchAndClickOnSearch();
+        //VerifyURL
+        pageAfterSearch.UserShouldVerifySearchedTextPageUrl();
+        //VerifyAllProductsShouldContainSearchedText
+        pageAfterSearch.UserShouldVerifyIfAllProductsContainsSearchedText();
+
+     }
+
 }

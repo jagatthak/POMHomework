@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.time.Duration;
 
 public class DriverManager extends Utils{
-    String browserName = "Firefox";
+    String browserName = "Chrome";
     char BrowserNameChar='C';
     public void openBrowser() {
         if (browserName.equalsIgnoreCase("Chrome")){

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegistrationPage extends Utils{
+    LoadProp loadprop = new LoadProp();
     private By _RadioButtonForMale = By.id("gender-male");
     private By _TextForFirstName = By.xpath("//input[@name='FirstName']");
     private By _TextForLastName = By.id("LastName");
@@ -17,7 +18,8 @@ public class RegistrationPage extends Utils{
 
     //verify register page url
     public void UserShouldVerifyRegisterUrl(){
-        urltobe(10,"https://demo.nopcommerce.com/register?returnUrl=%2F");
+        urltobe(10,loadprop.getProperty("urlRegister"));
+        validateURL(loadprop.getProperty("urlRegister"));
     }
     //select Radio Button for Male or Female
     public void UserShouldSelectRadioButton(){
@@ -25,38 +27,39 @@ public class RegistrationPage extends Utils{
     }
     //Enter Text for First Name
     public void UserShouldTypeTextForFirstName(){
-        TypeText((_TextForFirstName),"joy");
+        TypeText(_TextForFirstName, loadprop.getProperty("firstname"));
     }
     //Enter Text for Last Name
     public void UserShouldTypeTextForLastName(){
-        TypeText((_TextForLastName),"Tomer");
+        TypeText(_TextForLastName,loadprop.getProperty("lastname"));
     }
     // select BirthDay
     public void UserShouldSelectDayOfBirth(){
+        int DayOfBirth = Integer.parseInt(loadprop.getProperty("DayOfBirth"));
         Select Birthday = new Select(driver.findElement(_DayOfBirth));
-        Birthday.selectByIndex(3);
+        Birthday.selectByIndex(DayOfBirth);
     }
     // select BirthMonth
     public void UserShouldSelectMonthOfBirth(){
         Select BirthMonth = new Select(driver.findElement(_MonthOfBirth));
-        BirthMonth.selectByValue("2");
+        BirthMonth.selectByValue(loadprop.getProperty("MonthOfBirth"));
     }
     //select BirthYear
     public void UserShouldSlectYearOfBirth(){
         Select BirthYear = new Select(driver.findElement(_YearOfBirth));
-        BirthYear.selectByValue("1977");
+        BirthYear.selectByValue(loadprop.getProperty("YearOfBirth"));
     }
     //Enter Email
     public void UserShouldEnterEmail(){
-        TypeText(_Email,"joy123"+RandomDate()+"@gmail.com");
+        TypeText(_Email,loadprop.getProperty("EmailFirstPart")+RandomDate()+loadprop.getProperty("EmailSecondPart"));
     }
     //Enter Password
     public void UserShouldEnterPassword(){
-        TypeText(_Password,"Joy123");
+        TypeText(_Password,loadprop.getProperty("Password"));
     }
     //Confirm Password
     public void UserShouldConfirmPassword() {
-        TypeText(_ConfirmPassword,"Joy123");
+        TypeText(_ConfirmPassword,loadprop.getProperty("ConfirmPassword"));
     }
     //Click on Register button
     public void UserShouldClickOnRegisterButton(){
