@@ -3,6 +3,9 @@ package org.example;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -90,15 +93,17 @@ public class HomePage extends Utils {
     //Verify Only registered user can vote
     public void UserShouldVerifyMessageAfterClickingVoteButton() {
         String actualMessage = driver.findElement(_SelectVoteErrorMessage).getText();
-        String expectedMessage = "Vote.";
-        Assert.assertNotEquals(actualMessage, expectedMessage, "User is not registered");
+        System.out.println(actualMessage);
+        String expectedMessage = "Only registered users can vote";
+        Assert.assertNotEquals(actualMessage,expectedMessage, "User is registered");
     }
 
     //    Assert.assertTrue(String.IsNullOrEmpty(actualMessage));}
     //Verify After Registering User Should be able to vote
     public void UserShouldBeAbleTOVoteAfterRegistering() {
         String actualMessage1 = driver.findElement(_SelectTotalVotesMessage).getText();
-        String expectedMessage1 = " vote";
+        System.out.println(actualMessage1);
+        String expectedMessage1 = "vote";
         Assert.assertTrue(actualMessage1.contains("vote"), "User is not able to vote");
     }
 
@@ -138,6 +143,23 @@ public class HomePage extends Utils {
         //Enter text in searchBox and Click on Search Button
         TypeText(_TextForSearch,loadprop.getProperty("TextForSearch"));
         ClickElement(_ClickOnSearch);
+    }
+    public void UserShouldBeAbleToHoverOverComputers(){
+        Actions builder = new Actions(driver);
+        Action mouseOverHowe = builder.moveToElement(driver.findElement(By.linkText("Computers"))).build();
+
+        String bgColorBefore = driver.findElement(By.linkText("Computers")).getCssValue("color");
+        System.out.println("Before hover: " + bgColorBefore);
+        mouseOverHowe.perform();
+        String bgColorAfter = driver.findElement(By.linkText("Computers")).getCssValue("color");
+        System.out.println("After hover: " + bgColorAfter);
+        Action moveToSubmenu = builder.moveToElement(driver.findElement(By.linkText("Software"))).click().build();
+//        WebElement t= driver.findElement(By.linkText("Computers"));
+////        String s =t.getCssValue("color");
+////        String c = Color.fromString(s).asHex();
+////        System.out.println(c);
+        Assert.assertFalse(bgColorBefore.equals(bgColorAfter),"Color before hovering and after hovering are equal");
+        moveToSubmenu.perform();
     }
     }
 

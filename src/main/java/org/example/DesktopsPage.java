@@ -62,7 +62,7 @@ public class DesktopsPage extends Utils{
         SelectFromDropDownMenuByValue(_SelectSortByDropDownMenu,loadprop.getProperty("DesktopSortByValue"));
     }
     public void UserShouldCompareToExpectedSortingZToA(){
-        //Creating List of Products on Desktop Page
+        //Creating List of Products on Desktop Page From WebElements To String
         ArrayList<String> ActualList = new ArrayList<>();
         List<WebElement> ProductsList = driver.findElements(_AllProductsNames);
         System.out.println(ProductsList.size());

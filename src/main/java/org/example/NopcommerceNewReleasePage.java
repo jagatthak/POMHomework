@@ -45,12 +45,13 @@ public class NopcommerceNewReleasePage extends Utils {
     }
 
     public void VerifyYourCommentIsLast(){
-        //Verify that added comment is last in the list
-        List<WebElement> Allcomments=driver.findElements(_AllCommentList);
+        //Creating list of all comments
+        List<WebElement> AllComments=driver.findElements(_AllCommentList);
         List<String>CommentList = new ArrayList<>();
-        for(WebElement t: Allcomments){
+        for(WebElement t: AllComments){
             CommentList.add(t.getText());
         }
+        //Verify that added comment is last in the list
         Assert.assertTrue(CommentList.contains(loadprop.getProperty("CommentName")));
         String LastComment = CommentList.get(CommentList.size()-1);
 

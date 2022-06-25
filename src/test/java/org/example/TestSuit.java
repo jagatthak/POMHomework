@@ -16,7 +16,7 @@ public class TestSuit extends BaseTest {
     FacebookPage facebookPage =new FacebookPage();
 
 
-    @Test
+    @Test (priority = 1)
     public void UserShouldBeAbleToRegisterSuccessfullyAndVerifyRegistrationMessage() {
 
         //Click on register
@@ -30,11 +30,16 @@ public class TestSuit extends BaseTest {
         //Enter Text for Last Name
         registrationPage.UserShouldTypeTextForLastName();
         // select BirthDay
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         registrationPage.UserShouldSelectDayOfBirth();
-        // select BirthMonth
+       // select BirthMonth
         registrationPage.UserShouldSelectMonthOfBirth();
         //select BirthYear
-        registrationPage.UserShouldSlectYearOfBirth();
+        registrationPage.UserShouldSelectYearOfBirth();
         //Enter Email
         registrationPage.UserShouldEnterEmail();
         //Enter Password
@@ -47,7 +52,7 @@ public class TestSuit extends BaseTest {
         registrationSuccessPage.UserShouldRegisterSuccessfully();
     }
 
-    @Test
+    @Test(priority = 2)
     public void UserShouldBeAbleToAddToCartForBuildYourOwnComputerAndVerifyInShoppingCart() {
         //Click on Computers
         homepage.UserShouldClickOnComputers();
@@ -79,7 +84,7 @@ public class TestSuit extends BaseTest {
         shoppingCartPage.UserShouldVerifyShoppingCartAndBuildYourOwnComputer();
     }
 
-    @Test
+    @Test(priority = 3)
     public void UserShouldBeAbleToSeeUSDollarOREuroSignOnPriceForBuildYourOwnComputerWhenSelectedInDropdownMenu() {
         //Selecting Euro
         homepage.UserShouldSelectEuroAsCurrency();
@@ -91,7 +96,7 @@ public class TestSuit extends BaseTest {
         homepage.UserShouldVerifyBuildYourOwnComputerPriceChangedToUSDollar();
     }
 
-    @Test
+    @Test(priority = 4)
     public void UserShouldBeAbleToReferAFriendForBuildYouOwnComputerAndVerifyYourMessageHasBeenSent() {
         //Click on register
         homepage.ClickOnRegisterButton();
@@ -108,7 +113,7 @@ public class TestSuit extends BaseTest {
         // select BirthMonth
         registrationPage.UserShouldSelectMonthOfBirth();
         //select BirthYear
-        registrationPage.UserShouldSlectYearOfBirth();
+        registrationPage.UserShouldSelectYearOfBirth();
         //Enter Email
         registrationPage.UserShouldEnterEmail();
         //Enter Password
@@ -135,7 +140,7 @@ public class TestSuit extends BaseTest {
         emailAFriendPage.UserShouldVerifyTheMessage();
     }
 
-    @Test
+    @Test(priority = 5)
     public void UserShouldBeAbleToVoteAndVerifyVotes() {
 
         //click on Good radio button below Community poll
@@ -159,7 +164,7 @@ public class TestSuit extends BaseTest {
         // select BirthMonth
         registrationPage.UserShouldSelectMonthOfBirth();
         //select BirthYear
-        registrationPage.UserShouldSlectYearOfBirth();
+        registrationPage.UserShouldSelectYearOfBirth();
         //Enter Email
         registrationPage.UserShouldEnterEmail();
         //Enter Password
@@ -178,13 +183,13 @@ public class TestSuit extends BaseTest {
         homepage.UserShouldBeAbleTOVoteAfterRegistering();
     }
 
-    @Test
+    @Test(priority = 6)
     //GetProductTitlesFromHomePageByArrayList
     public void GetProductTitlesFromHomePge() {
         homepage.GetProductTitles();
     }
 
-    @Test
+    @Test(priority = 7)
     public void ByClickingOnVoteButtonWithoutRegisteringUserShouldGetAlertAndAbleToComeBackToHomePage(){
         //ClickOnVoteButton
         homepage.UserShouldClickOnVoteButton();
@@ -197,7 +202,7 @@ public class TestSuit extends BaseTest {
         homepage.UserShouldSwitchToAlertWithoutRegisteringAndComeBackToParentWindow();
     }
 
-    @Test
+    @Test(priority = 9)
     public void UserShouldClickOnFaceBookButtonAndPopupWindowShouldAppearAndComeBackToParentWindow(){
         //ClickOnFacebookButton
         homepage.UserShouldBeAbleToClickOnFacebookButton();
@@ -207,7 +212,7 @@ public class TestSuit extends BaseTest {
         homepage.UserShouldVerifyHomePageUrl();
     }
 
-    @Test
+    @Test(priority = 7)
     public void UserShouldClickOnNopCommerceNewReleaseAndAddNewCommentAndVerify(){
         //ClickOnNopcommerceNewRelease
         homepage.UserShouldClickOnNopCommerceNewRelease();
@@ -225,7 +230,7 @@ public class TestSuit extends BaseTest {
         nopcommerceNewReleasePage.VerifyYourCommentIsLast();
 
     }
-    @Test
+    @Test(priority =10)
     public void UserShouldNavigateToDesktopPageAndVerifyZToASortingOfProducts(){
         //ClickOnComputers
         homepage.UserShouldClickOnComputers();
@@ -240,7 +245,7 @@ public class TestSuit extends BaseTest {
         //CompareActualProductListToExpectedListSortedAsPerZToA
         desktopsPage.UserShouldCompareToExpectedSortingZToA();
      }
-     @Test
+     @Test(priority = 8)
     public void UserShouldSearchTextAndVerifyForTextInProductTitles(){
         //EnterTextInSearchAndClickOnSearch
         homepage.UserShouldEnterTextInSearchAndClickOnSearch();
@@ -249,6 +254,10 @@ public class TestSuit extends BaseTest {
         //VerifyAllProductsShouldContainSearchedText
         pageAfterSearch.UserShouldVerifyIfAllProductsContainsSearchedText();
 
+     }
+     @Test(priority = 9)
+     public void UserShouldBeAbleToPerformMouseActionAndVerifyColor(){
+        homepage.UserShouldBeAbleToHoverOverComputers();
      }
 
 }

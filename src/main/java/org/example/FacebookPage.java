@@ -26,7 +26,8 @@ public class FacebookPage extends Utils {
                     e.printStackTrace();
                 }
                 //Verify Current Url Contains facebook text
-                System.out.println(driver.getCurrentUrl());
+               System.out.println(driver.getCurrentUrl());
+
                 Assert.assertTrue(driver.getCurrentUrl().contains("facebook"));
                 //Close child window
                 driver.close();
